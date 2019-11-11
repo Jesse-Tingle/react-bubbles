@@ -1,13 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
+import api from '../utils/api';
 
-const Login = () => {
+function Login(props) {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+
+  const [err, setErr] = useState('')
+
+  const [data, setData] = useState({
+      username: '',
+      password: ''
+  })
+
+  const handleChange = (event) => {
+      setData({
+          ...data,
+          [event.target.name]: event.target.value,
+      })
+  }
+
+  const handleSubmit = (e) => {
+      e.preventDefault()
+
+      api()
+          .post('/api/login', data)
+          .then(result => {
+              console.log('token', result.data)
+              localStorage.setItem('token', result.data.payload)
+              props.history.push('/bubblepage')
+          })
+          .catch(err => {
+              setErr(err.response.data.error)
+          })
+  }
+
   return (
-    <>
-      <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
-    </>
+    <form onSubmit={handleSubmit}>
+            <h2>Log In</h2>
+            {err && <div className="err">{err}</div>}
+
+            <input type="text" name="username" placeholder="username" value={data.username} onChange={handleChange} />
+            <input type="password" name="password" placeholder="password" value={data.password} onChange={handleChange} />
+            <button type="submit">Sign In</button>
+        </form>
   );
 };
 
