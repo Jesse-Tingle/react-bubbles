@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../utils/api";
 
 const initialColor = {
@@ -10,6 +10,18 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+
+  useEffect(() => {
+    api()
+      .get('/api/colors')
+      .then(res => {
+        console.log('res.data', res.data)
+        updateColors(res.data)
+      })
+      .catch(err => {
+
+      })
+  }, [editing])
 
   const editColor = color => {
     setEditing(true);
