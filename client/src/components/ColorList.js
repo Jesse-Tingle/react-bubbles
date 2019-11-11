@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import api from "../utils/api";
 
 const initialColor = {
   color: "",
@@ -11,6 +11,18 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  useEffect(() => {
+    api()
+      .get('/api/colors')
+      .then(res => {
+        console.log('res.data', res.data)
+        updateColors(res.data)
+      })
+      .catch(err => {
+
+      })
+  }, [editing])
+
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -18,14 +30,35 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-  };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
-  };
+    api()
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        console.log('saveEdit res', res)
+      })
+      .catch(err => {
+        console.log('saveEdit err', err)
+      
+      })    
+      setEditing(false)
+    };
+
+    const deleteColor = color => {
+      // make a delete request to delete this color
+      if (window.confirm("Are you SURE you want to DELETE this color?")) {
+  
+        api()
+          .delete(`/api/colors/${color.id}`)
+          .then(result => {
+            console.log(`Color number ${color.id} deleted`);
+            let newColors = colors.filter(clr => clr.id !== color.id);
+            updateColors(newColors)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    };
 
   return (
     <div className="colors-wrap">

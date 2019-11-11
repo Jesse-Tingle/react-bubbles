@@ -29,10 +29,25 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    
+    - A user logs into a website and if the username and password they have provided are correct then the 
+    server will send the user a web token which gets set to local storage. This web token is grabbed from local storage any time the user navigates to a protected route. When the user clicks on a protected route it checks for the token in local storage and if there is no token then it routes the user to the login page.
 
+- [ ] What steps can you take in your web apps to keep your data secure?
+    
+    - You can keep data secure by putting data that needs to be protected behind a protected route so that only users with the correct web token can access the data. Hosting as a service can also provide another layer of security by having another company manage your hosting servers.
+
+- [ ] Describe how web servers work.
+
+    - A web server processes incoming network requests over HTTP and several other related protocols. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server takes place using the Hypertext Transfer Protocol (HTTP).
+
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+CRUD = Create, Read, Update, Delete
+
+Create = POST
+Read   = GET
+Update = PUT
+Delete = DELETE
 
 ## Project Set Up
 
