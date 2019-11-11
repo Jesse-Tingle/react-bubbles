@@ -1,15 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
 
-import ColorList from "./components/ColorList";
 import BubblePage from './components/BubblePage';
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
-const token = window.localStorage.getItem('token');
+// const token = window.localStorage.getItem('token');
 
 
 function App() {

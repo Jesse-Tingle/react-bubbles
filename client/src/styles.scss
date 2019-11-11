@@ -84,6 +84,14 @@ form {
   }
 }
 
+.login-form {
+  align-items: center;
+
+  button {
+    margin-top: 5px;
+  }
+}
+
 .button-row {
   display: flex;
   justify-content: space-between;

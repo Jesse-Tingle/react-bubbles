@@ -35,7 +35,8 @@ function Login(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
+            <h1>React Bubbles - Sprint Challenge</h1>
             <h2>Log In</h2>
             {err && <div className="err">{err}</div>}
 
