@@ -43,9 +43,22 @@ const ColorList = ({ colors, updateColors }) => {
       setEditing(false)
     };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
-  };
+    const deleteColor = color => {
+      // make a delete request to delete this color
+      if (window.confirm("Are you SURE you want to DELETE this color?")) {
+  
+        api()
+          .delete(`/api/colors/${color.id}`)
+          .then(result => {
+            console.log(`Color number ${color.id} deleted`);
+            let newColors = colors.filter(clr => clr.id !== color.id);
+            updateColors(newColors)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    };
 
   return (
     <div className="colors-wrap">
