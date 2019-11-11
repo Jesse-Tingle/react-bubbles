@@ -42,7 +42,12 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
     - A web server processes incoming network requests over HTTP and several other related protocols. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server takes place using the Hypertext Transfer Protocol (HTTP).
 
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+CRUD = Create, Read, Update, Delete
 
+Create = POST
+Read   = GET
+Update = PUT
+Delete = DELETE
 
 ## Project Set Up
 
