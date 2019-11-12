@@ -11,18 +11,6 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
-  useEffect(() => {
-    api()
-      .get('/api/colors')
-      .then(res => {
-        console.log('res.data', res.data)
-        updateColors(res.data)
-      })
-      .catch(err => {
-
-      })
-  }, [editing])
-
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -35,6 +23,10 @@ const ColorList = ({ colors, updateColors }) => {
       .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         console.log('saveEdit res', res)
+        updateColors(colors.map(color =>
+          color.id === res.data.id
+          ? res.data
+          : color))
       })
       .catch(err => {
         console.log('saveEdit err', err)
